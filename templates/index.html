@@ -1,10 +1,10 @@
 
-{% extends index.html %}
+{% extends "base.html" %}
 
-{% titleBlock %}
-Title
+{% block title %}
+<title>Title 1</title>
 {% endblock %}
 
-{% mainBlock %}
+{% block body %}
 <h1>Heading</h1>
 {% endblock %}
