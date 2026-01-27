@@ -13,11 +13,21 @@ class User(db.Model) :
     password = db.Column(db.String(15) , nullable = False)
     phNo = db.Column(db.Integer)
     address = db.Column(db.String(40))
+    type = db.Column(db.Integer)
 
 class Worker(db.Model) :
-    id = db.Column(db.Integer , primary_key = True)
+    id = db.Column(db.Integer , primary_key = True, autoincrement = True)
     username = db.Column(db.String(20) , unique = True , nullable = False)
     password = db.Column(db.String(15) , nullable = False)
+    phNo = db.Column(db.Integer)
+    address = db.Column(db.String(40))
+    type = db.Column(db.Integer)
+
+class request(db.Model) :
+    username = db.Column(db.String(20) , unique = True , nullable = False)
+    password = db.Column(db.String(15) , nullable = False)
+    phNo = db.Column(db.Integer)
+    address = db.Column(db.String(40))
 
 class bill(db.Model) :
     id = db.Column(db.Integer , primary_key = True)
@@ -27,16 +37,14 @@ class bill(db.Model) :
 
 @app.route("/" , methods = ['GET' , 'POST'])
 def home():
-    '''
     if request.method == 'POST' :
         session['username'] = request.form['username']
         password = request.form['password']
-        flag = True
         user = db.session.execute("select * from User where username == " + session['username']).first()
         user1 = db.session.execute("select * from Worker where username == " + session['username']).first()
-        if user in None and user1 in None :
+        if user is None and user1 is None :
             return "User not found"
-        if user not None :
+        if user not in None :
             if user.password != password :
                 return "Invalid password"
             return url_for('userDashboard')
@@ -46,8 +54,15 @@ def home():
             return "Unauthoraised user"
         if user1.password == password :
             return url_for('wrokerDashboard')
-        '''
     return render_template("index.html")
+
+def register() :
+    if request.method == 'POST' :
+        username = request.form['username']
+        password = request.form['password']
+        phNo = request.form['phNo']
+        address = request.form['address']
+    return render_template("register.html")
 
 if __name__ == "__main__":
     with app.app_context() :

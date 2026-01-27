@@ -1,0 +1,32 @@
+{% extends base.html %}
+
+{% block body %}
+<form>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="email" class="form-control" id="email" name = "email">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name = "password">
+    </div>
+    <div class="mb-3">
+        <label for="phNO" class="form-label">Phone Number</label>
+        <input type="text" class="form-control" id="phNo" name = "phNo">
+    </div>
+    <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="textarea" class="form-control" id="address" name = "address">
+    </div>
+    <div class="input-group mb-3">
+        <label class="input-group-text" for="inputGroupSelect01">Type of meter you need</label>
+        <select class="form-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">Houesehold</option>
+          <option value="2">Commersial</option>
+          <option value="3">Industry</option>
+        </select>
+      </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
